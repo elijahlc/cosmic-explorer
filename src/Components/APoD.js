@@ -10,6 +10,7 @@ const APoD = () => {
 	const [result, setResult] = useState({});
 
 	useEffect(() => {
+		console.log(formatToday());
 		setDate(formatToday());
 	}, []);
 
@@ -30,24 +31,19 @@ const APoD = () => {
 	const getAPoD = async () => {
 		setIsLoading(true);
 
-		const options = {
-			mode: 'cors',
-		};
-
 		try {
-			await fetch(
-				`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_API_KEY}`,
-				options
-			).then(async function (response) {
-				if (response.ok) {
-					const data = await response.json();
-					setResult({ ...data });
-					setHasResult(true);
-					setHasError(false);
-				} else {
-					setHasError(true);
+			await fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_API_KEY}`).then(
+				async function (response) {
+					if (response.ok) {
+						const data = await response.json();
+						setResult({ ...data });
+						setHasResult(true);
+						setHasError(false);
+					} else {
+						setHasError(true);
+					}
 				}
-			});
+			);
 		} catch (err) {
 			setHasError(true);
 		} finally {
@@ -59,7 +55,7 @@ const APoD = () => {
 		<div className="APoD">
 			<>
 				<h1>Pick a date</h1>
-				<input type="date" value={date} onChange={handleDateChange} />
+				<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
 				<button onClick={getAPoD}>Get APoD</button>
 			</>
 
