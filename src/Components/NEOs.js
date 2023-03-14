@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import Loading from './Loading';
+import Error from './Error';
 import NEO from './NEO';
 
 const NEOs = () => {
@@ -49,6 +51,11 @@ const NEOs = () => {
 			setIsLoading(false);
 		}
 	};
+
+	if (hasError) {
+		return <Error />;
+	}
+
 	return (
 		<div>
 			<>
@@ -57,11 +64,9 @@ const NEOs = () => {
 				<button onClick={getNEOs}>Get NEOs</button>
 			</>
 
-			{isLoading && <div>Searching the cosmos</div>}
+			{isLoading && <Loading />}
 
-			{hasError && <div>An error has occurred</div>}
-
-			{hasResult && (
+			{hasResult && !isLoading && (
 				<div>
 					<h2>{NEOs.element_count} objects found!</h2>
 

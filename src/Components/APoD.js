@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import Loading from './Loading';
+import Error from './Error';
 import APoDResult from './APoDResult';
 
 const APoD = () => {
@@ -50,6 +52,10 @@ const APoD = () => {
 		}
 	};
 
+	if (hasError) {
+		return <Error />;
+	}
+
 	return (
 		<div className="APoD">
 			<>
@@ -58,11 +64,9 @@ const APoD = () => {
 				<button onClick={getAPoD}>Get APoD</button>
 			</>
 
-			{isLoading && <div>Searching the cosmos</div>}
+			{isLoading && <Loading />}
 
-			{hasError && <div>An error has occurred</div>}
-
-			{hasResult && <APoDResult {...APoD} />}
+			{hasResult && !isLoading && <APoDResult {...APoD} />}
 		</div>
 	);
 };
