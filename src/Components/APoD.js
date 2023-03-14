@@ -36,7 +36,7 @@ const APoD = () => {
 
 		try {
 			await fetch(
-				`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apiKey ? apiKey : process.env.REACT_APP_API_KEY}`,
+				`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_API_KEY}`,
 				options
 			).then(async function (response) {
 				if (response.ok) {
