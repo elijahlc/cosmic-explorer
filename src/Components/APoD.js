@@ -57,7 +57,7 @@ const APoD = () => {
 	}
 
 	return (
-		<div className="APoD">
+		<main className="APoD">
 			<>
 				<h1>Pick a date</h1>
 				<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
@@ -67,7 +67,7 @@ const APoD = () => {
 			{isLoading && <Loading />}
 
 			{hasResult && !isLoading && <APoDResult {...APoD} />}
-		</div>
+		</main>
 	);
 };
 

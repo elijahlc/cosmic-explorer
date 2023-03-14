@@ -57,7 +57,7 @@ const NEOs = () => {
 	}
 
 	return (
-		<div>
+		<main>
 			<>
 				<h1>Pick a date to see the Near-Earth Objects in the following 7-day period.</h1>
 				<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
@@ -83,7 +83,7 @@ const NEOs = () => {
 					))}
 				</div>
 			)}
-		</div>
+		</main>
 	);
 };
 
