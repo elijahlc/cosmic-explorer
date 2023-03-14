@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import APoDResult from './APoDResult';
 
-import apiKey from '../secrets';
-
 const APoD = () => {
 	const [date, setDate] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
