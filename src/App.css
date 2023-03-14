@@ -1,3 +1,26 @@
 body {
 	background-color: #3d405b;
+	color: #fff;
+}
+
+/* global styling */
+
+a {
+	text-decoration: none;
+	color: #f4f1de;
+}
+
+a:hover {
+	color: #e07a5f;
+	text-decoration: underline;
+}
+
+/* component styling */
+
+.Nav {
+	height: 5vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	font-size: 1.25rem;
 }
