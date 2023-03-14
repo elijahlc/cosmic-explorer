@@ -7,10 +7,9 @@ const APoD = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [hasResult, setHasResult] = useState(false);
-	const [result, setResult] = useState({});
+	const [APoD, setAPoD] = useState({});
 
 	useEffect(() => {
-		console.log(formatToday());
 		setDate(formatToday());
 	}, []);
 
@@ -36,7 +35,7 @@ const APoD = () => {
 				async function (response) {
 					if (response.ok) {
 						const data = await response.json();
-						setResult({ ...data });
+						setAPoD({ ...data });
 						setHasResult(true);
 						setHasError(false);
 					} else {
@@ -63,7 +62,7 @@ const APoD = () => {
 
 			{hasError && <div>An error has occurred</div>}
 
-			{hasResult && <APoDResult {...result} />}
+			{hasResult && <APoDResult {...APoD} />}
 		</div>
 	);
 };
