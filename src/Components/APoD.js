@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import apiKey from '../secrets';
 
 import APoDResult from './APoDResult';
+
+import apiKey from '../secrets';
 
 const APoD = () => {
 	const [date, setDate] = useState('');
@@ -36,9 +37,10 @@ const APoD = () => {
 		};
 
 		try {
-			await fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apiKey}`, options).then(async function (
-				response
-			) {
+			await fetch(
+				`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apiKey ? apiKey : process.env.REACT_APP_API_KEY}`,
+				options
+			).then(async function (response) {
 				if (response.ok) {
 					const data = await response.json();
 					setResult({ ...data });
