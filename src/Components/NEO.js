@@ -5,7 +5,7 @@ const NEO = ({ name, dangerous, diameter_min, diameter_max, closest_approach, mi
 		<div className="NEO">
 			<span className="asteroid">☄️</span>
 
-			<h3>{name}</h3>
+			<h3 className="alien">{name}</h3>
 
 			<p>
 				Estimated diameter between {Math.round(diameter_min)} and {Math.round(diameter_max)} meters

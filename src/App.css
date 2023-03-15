@@ -1,34 +1,28 @@
-body {
-	background-color: #212529;
-	color: #e9ecef;
-	font-weight: 300;
-}
-
 /* global styling */
 
 h1 {
 	margin: 0;
 	text-align: center;
 	font-weight: 300;
-	font-size: 56px;
+	font-size: 4rem;
 }
 
 h2 {
 	margin: 0;
 	text-align: center;
 	font-weight: 300;
-	font-size: 40px;
+	font-size: 3rem;
 }
 
 h3 {
 	margin: 0;
 	text-align: center;
 	font-weight: 300;
-	font-size: 32px;
+	font-size: 2rem;
 }
 
 p {
-	font-size: 24px;
+	font-size: 1.5rem;
 	text-align: center;
 }
 
@@ -51,7 +45,7 @@ button:hover {
 }
 
 button:active {
-	background-color: #497fab;
+	background-color: #4a6382;
 }
 
 input[type='date'] {
@@ -85,6 +79,7 @@ a:hover {
 }
 
 .selector {
+	padding: 0.5rem;
 	width: 25%;
 	display: flex;
 	flex-direction: column;
@@ -107,7 +102,7 @@ a:hover {
 }
 
 .asteroid {
-	font-size: 48px;
+	font-size: 4rem;
 }
 
 /* component styling */
@@ -120,7 +115,8 @@ a:hover {
 	font-size: 1.25rem;
 }
 
-.Home {
+.Home,
+.Error {
 	min-height: calc((var(--vh, 1vh) * 100) - 5rem - 2rem);
 	padding: 1rem;
 	display: flex;
@@ -154,25 +150,72 @@ a:hover {
 
 .NEO-container {
 	display: flex;
+	justify-content: center;
 	flex-direction: row;
 	flex-wrap: wrap;
+	margin: 0;
 }
 
 .NEO {
 	width: calc(33% - 1rem);
-	height: 350px;
 	background-color: #7e7285;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	border-radius: 5px;
 }
 
 .Loading {
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	font-size: 32px;
+	font-size: 2rem;
+}
+
+/* smaller desktop styling */
+
+@media (max-width: 1325px) {
+	.selector div {
+		flex-direction: column;
+	}
+}
+
+/* tablet styling */
+
+@media (max-width: 992px) {
+	h1 {
+		font-size: 2.5rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+	}
+
+	h3 {
+		font-size: 1.75rem;
+	}
+
+	p {
+		font-size: 1.5rem;
+	}
+
+	.selector {
+		width: 33%;
+	}
+
+	.result-container {
+		width: 67%;
+	}
+
+	.NEO-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.NEO {
+		width: calc(100% - 1rem);
+	}
 }
 
 /* portrait mobile styling */
@@ -183,20 +226,35 @@ a:hover {
 	}
 
 	h1 {
-		font-size: 32px;
+		font-size: 2rem;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+	}
+
+	h3 {
+		font-size: 1.25rem;
 	}
 
 	p {
-		font-size: 24px;
+		font-size: 1rem;
 	}
 
 	.feature {
 		flex-direction: column;
 	}
 
-	.selector,
+	.selector {
+		width: calc(100% - 2rem - 2px);
+	}
+
+	.selector div {
+		flex-direction: row;
+	}
+
 	.result-container {
-		width: calc(100% - 1rem);
+		width: calc(100% - 1rem - 2px);
 	}
 
 	.APoDResult img {

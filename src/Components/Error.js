@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 
 const Error = () => {
 	return (
-		<div>
-			Houston, we have a problem. <Link to="/">Get home safely.</Link>
-		</div>
+		<main className="Error">
+			<p>
+				Houston, we have a problem. <Link to="/">Get home safely.</Link>
+			</p>
+		</main>
 	);
 };
 
