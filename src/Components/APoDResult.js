@@ -2,8 +2,11 @@ import React from 'react';
 
 const APoDResult = ({ date, explanation, media_type, title, url }) => {
 	return (
-		<div>
-			<h2>{title}</h2>
+		<div className="APoDResult">
+			<h2>Astronomy Picture of the Day for {date}</h2>
+
+			<h3>{title}</h3>
+
 			{media_type === 'image' ? (
 				<img src={url} alt={title} />
 			) : (

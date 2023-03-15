@@ -57,32 +57,39 @@ const NEOs = () => {
 	}
 
 	return (
-		<main>
-			<>
-				<h1>Pick a date to see the Near-Earth Objects in the following 7-day period.</h1>
-				<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
-				<button onClick={getNEOs}>Get NEOs</button>
-			</>
+		<main className="feature">
+			<div className="selector">
+				<h1>Pick a date to see the Near-Earth Objects in the following 7-day period</h1>
 
-			{isLoading && <Loading />}
-
-			{hasResult && !isLoading && (
 				<div>
-					<h2>{NEOs.element_count} objects found!</h2>
-
-					{Object.values(NEOs.near_earth_objects).map((object) => (
-						<NEO
-							key={object[0].id}
-							name={object[0].name}
-							dangerous={object[0].is_potentially_hazardous_asteroid}
-							diameter_min={object[0].estimated_diameter.meters.estimated_diameter_min}
-							diameter_max={object[0].estimated_diameter.meters.estimated_diameter_max}
-							closest_approach={object[0].close_approach_data[0].close_approach_date}
-							miss_distance={object[0].close_approach_data[0].miss_distance.kilometers}
-						/>
-					))}
+					<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
+					<button onClick={getNEOs}>Get NEOs</button>
 				</div>
-			)}
+			</div>
+
+			<div className="result-container">
+				{isLoading && <Loading />}
+
+				{hasResult && !isLoading && (
+					<>
+						<h2>{NEOs.element_count} Objects Found</h2>
+
+						<div className="NEO-container">
+							{Object.values(NEOs.near_earth_objects).map((object) => (
+								<NEO
+									key={object[0].id}
+									name={object[0].name}
+									dangerous={object[0].is_potentially_hazardous_asteroid}
+									diameter_min={object[0].estimated_diameter.meters.estimated_diameter_min}
+									diameter_max={object[0].estimated_diameter.meters.estimated_diameter_max}
+									closest_approach={object[0].close_approach_data[0].close_approach_date}
+									miss_distance={object[0].close_approach_data[0].miss_distance.kilometers}
+								/>
+							))}
+						</div>
+					</>
+				)}
+			</div>
 		</main>
 	);
 };

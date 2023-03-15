@@ -57,16 +57,21 @@ const APoD = () => {
 	}
 
 	return (
-		<main className="APoD">
-			<>
-				<h1>Pick a date</h1>
-				<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
-				<button onClick={getAPoD}>Get APoD</button>
-			</>
+		<main className="feature">
+			<div className="selector">
+				<h1>Pick a date to see a picture</h1>
 
-			{isLoading && <Loading />}
+				<div>
+					<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
+					<button onClick={getAPoD}>Get APoD</button>
+				</div>
+			</div>
 
-			{hasResult && !isLoading && <APoDResult {...APoD} />}
+			<div className="result-container">
+				{isLoading && <Loading />}
+
+				{hasResult && !isLoading && <APoDResult {...APoD} />}
+			</div>
 		</main>
 	);
 };
