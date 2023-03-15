@@ -72,7 +72,9 @@ const NEOs = () => {
 
 				{hasResult && !isLoading && (
 					<>
-						<h2>{NEOs.element_count} Objects Found</h2>
+						<h2>
+							{NEOs.element_count} Object{NEOs.element_count !== 1 && 's'} Found
+						</h2>
 
 						<div className="NEO-container">
 							{Object.values(NEOs.near_earth_objects).map((object) => (
