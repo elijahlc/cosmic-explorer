@@ -47,6 +47,7 @@ const NEOs = () => {
 				}
 			});
 		} catch (err) {
+			console.log(err);
 			setHasError(true);
 		} finally {
 			setIsLoading(false);
@@ -77,17 +78,21 @@ const NEOs = () => {
 						</h2>
 
 						<div className="NEO-container">
-							{Object.values(NEOs.near_earth_objects).map((object) => (
-								<NEO
-									key={object[0].id}
-									name={object[0].name}
-									dangerous={object[0].is_potentially_hazardous_asteroid}
-									diameter_min={object[0].estimated_diameter.meters.estimated_diameter_min}
-									diameter_max={object[0].estimated_diameter.meters.estimated_diameter_max}
-									closest_approach={object[0].close_approach_data[0].close_approach_date}
-									miss_distance={object[0].close_approach_data[0].miss_distance.kilometers}
-								/>
-							))}
+							{Object.values(NEOs.near_earth_objects).map((objectsOnDate) =>
+								objectsOnDate.map((object) => {
+									return (
+										<NEO
+											key={object.id}
+											name={object.name}
+											dangerous={object.is_potentially_hazardous_asteroid}
+											diameter_min={object.estimated_diameter.meters.estimated_diameter_min}
+											diameter_max={object.estimated_diameter.meters.estimated_diameter_max}
+											closest_approach={object.close_approach_data[0].close_approach_date}
+											miss_distance={object.close_approach_data[0].miss_distance.kilometers}
+										/>
+									);
+								})
+							)}
 						</div>
 					</>
 				)}
