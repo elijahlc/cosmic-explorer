@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import DataSelector from './DataSelector';
 import Loading from './Loading';
 import Error from './Error';
 import NEO from './NEO';
@@ -58,14 +59,13 @@ const NEOs = () => {
 
 	return (
 		<main className="feature">
-			<div className="selector">
-				<h1>Pick a date to see Near Earth Objects in the following 7-day period</h1>
-
-				<div>
-					<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
-					<button onClick={getNEOs}>Get NEOs</button>
-				</div>
-			</div>
+			<DataSelector
+				instruction="Pick a date to see Near Earth Objects in the following 7-day period"
+				date={date}
+				handleDateChange={handleDateChange}
+				handleSubmit={getNEOs}
+				dateFormatter={formatToday}
+			/>
 
 			<div className="result-container">
 				{isLoading && <Loading />}

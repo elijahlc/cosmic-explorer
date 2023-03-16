@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import DataSelector from './DataSelector';
 import Loading from './Loading';
 import Error from './Error';
 import APoDResult from './APoDResult';
@@ -58,14 +59,13 @@ const APoD = () => {
 
 	return (
 		<main className="feature">
-			<div className="selector">
-				<h1>Pick a date to see a picture</h1>
-
-				<div>
-					<input type="date" value={date} onChange={handleDateChange} max={formatToday()} />
-					<button onClick={getAPoD}>Get APoD</button>
-				</div>
-			</div>
+			<DataSelector
+				instruction="Pick a date to see a picture"
+				date={date}
+				handleDateChange={handleDateChange}
+				handleSubmit={getAPoD}
+				dateFormatter={formatToday}
+			/>
 
 			<div className="result-container">
 				{isLoading && <Loading />}
