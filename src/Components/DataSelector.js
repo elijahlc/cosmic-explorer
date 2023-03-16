@@ -5,7 +5,7 @@ const DataSelector = ({ instruction, date, handleDateChange, handleSubmit, dateF
 		<div className="selector">
 			<h1>{instruction}</h1>
 			<div>
-				<input type="date" value={date} onChange={handleDateChange} max={dateFormatter()} />
+				<input type="date" value={date} onChange={handleDateChange} max={dateFormatter()} min="1995-06-17" />
 				<button onClick={handleSubmit}>Submit</button>
 			</div>
 		</div>
