@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import DataSelector from './DataSelector';
 import Loading from './Loading';
 import Error from './Error';
+import RoverPhoto from './RoverPhoto';
 
 const MarsRoverPhotos = () => {
 	const [date, setDate] = useState('');
@@ -76,7 +77,16 @@ const MarsRoverPhotos = () => {
 							{photos.length} Photo{photos.length !== 1 && 's'} Found
 						</h2>
 
-						<div className="NEO-container"></div>
+						<div className="RoverPhotos-container">
+							{photos.map((photo) => (
+								<RoverPhoto
+									rover_name={photo.rover.name}
+									camera={photo.camera.full_name}
+									photo_url={photo.img_src}
+									key={photo.id}
+								/>
+							))}
+						</div>
 					</>
 				)}
 			</div>
