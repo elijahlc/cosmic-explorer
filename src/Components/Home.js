@@ -10,7 +10,8 @@ const Home = () => {
 
 			<p>
 				Use the links above to explore what's going on out here in 🌌 space 🌌, from NASA's Astronomy Picture of the Day
-				to finding out what asteroids are near Earth during any given week.
+				to finding out what asteroids are near Earth during any given week, to seeing recent photos taken by the Mars
+				Rovers.
 			</p>
 		</main>
 	);
