@@ -108,7 +108,7 @@ a:hover {
 /* component styling */
 
 .Nav {
-	height: 5rem;
+	height: 7rem;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -117,7 +117,7 @@ a:hover {
 
 .Home,
 .Error {
-	min-height: calc((var(--vh, 1vh) * 100) - 5rem - 2rem);
+	min-height: calc((var(--vh, 1vh) * 100) - 7rem - 2rem);
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
@@ -126,7 +126,7 @@ a:hover {
 }
 
 .feature {
-	min-height: calc((var(--vh, 1vh) * 100) - 5rem - 2rem);
+	min-height: calc((var(--vh, 1vh) * 100) - 7rem - 2rem);
 	display: flex;
 	justify-content: center;
 }
@@ -148,7 +148,8 @@ a:hover {
 	max-height: calc(var(--vh, 1vh) * 50);
 }
 
-.NEO-container {
+.NEO-container,
+.RoverPhotos-container {
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
@@ -156,7 +157,8 @@ a:hover {
 	margin: 0;
 }
 
-.NEO {
+.NEO,
+.RoverPhoto {
 	width: calc(33% - 1rem);
 	background-color: #7e7285;
 	display: flex;
@@ -164,6 +166,10 @@ a:hover {
 	align-items: center;
 	justify-content: center;
 	border-radius: 5px;
+}
+
+.RoverPhoto img {
+	max-width: 100%;
 }
 
 .Loading {
@@ -208,12 +214,14 @@ a:hover {
 		width: 67%;
 	}
 
-	.NEO-container {
+	.NEO-container,
+	.RoverPhotos-container {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.NEO {
+	.NEO,
+	.RoverPhoto {
 		width: calc(100% - 1rem);
 	}
 }
@@ -261,12 +269,14 @@ a:hover {
 		max-width: calc(100% - 1rem - 2px);
 	}
 
-	.NEO-container {
+	.NEO-container,
+	.RoverPhotos-container {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.NEO {
+	.NEO,
+	.RoverPhoto {
 		width: calc(100% - 1rem);
 	}
 }
