@@ -5,6 +5,7 @@ import Nav from './Components/Nav';
 import Home from './Components/Home';
 import APoD from './Components/APoD';
 import NEOs from './Components/NEOs';
+import MarsRoverPhotos from './Components/MarsRoverPhotos';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/apod" element={<APoD />} />
 				<Route path="/neos" element={<NEOs />} />
+				<Route path="/roverphotos" element={<MarsRoverPhotos />} />
 			</Routes>
 		</div>
 	);
