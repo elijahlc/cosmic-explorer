@@ -92,12 +92,12 @@ a:hover {
 	justify-content: center;
 }
 
-.result-container {
+.Feature-result-container {
 	width: 75%;
 	padding: 1rem 0;
 }
 
-.result-container * {
+.Feature-result-container * {
 	margin: 0.5rem;
 }
 
@@ -125,13 +125,13 @@ a:hover {
 	align-items: center;
 }
 
-.feature {
+.Feature {
 	min-height: calc((var(--vh, 1vh) * 100) - 7rem - 2rem);
 	display: flex;
 	justify-content: center;
 }
 
-.feature > * {
+.Feature > * {
 	margin: 0.5rem;
 	border: 1px solid #52798e;
 	border-radius: 5px;
@@ -211,7 +211,7 @@ a:hover {
 		width: 33%;
 	}
 
-	.result-container {
+	.Feature-result-container {
 		width: 67%;
 	}
 
@@ -250,7 +250,7 @@ a:hover {
 		font-size: 1rem;
 	}
 
-	.feature {
+	.Feature {
 		flex-direction: column;
 	}
 
@@ -262,7 +262,7 @@ a:hover {
 		flex-direction: row;
 	}
 
-	.result-container {
+	.Feature-result-container {
 		width: calc(100% - 1rem - 2px);
 	}
 

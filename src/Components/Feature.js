@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react';
 import DataSelector from './DataSelector';
 import Loading from './Loading';
 import Error from './Error';
-import NEO from './NEO';
 
-const NEOs = () => {
+import APoDResult from './APoDResult';
+import NEO from './NEO';
+import RoverPhoto from './RoverPhoto';
+
+const Feature = ({ featureName, instruction, endpoint }) => {
 	const [date, setDate] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [hasResult, setHasResult] = useState(false);
-	const [NEOs, setNEOs] = useState({});
+	const [data, setData] = useState({});
 
 	useEffect(() => {
 		setDate(formatToday());
@@ -30,16 +33,14 @@ const NEOs = () => {
 		setDate(e.target.value);
 	};
 
-	const getNEOs = async () => {
+	const getData = async () => {
 		setIsLoading(true);
 
 		try {
-			await fetch(
-				`https://api.nasa.gov/neo/rest/v1/feed?start_date=${date}&api_key=${process.env.REACT_APP_API_KEY}`
-			).then(async function (response) {
+			await fetch(`${endpoint}=${date}&api_key=${process.env.REACT_APP_API_KEY}`).then(async function (response) {
 				if (response.ok) {
 					const data = await response.json();
-					setNEOs({ ...data });
+					setData({ ...data });
 					setHasResult(true);
 					setHasError(false);
 				} else {
@@ -47,7 +48,6 @@ const NEOs = () => {
 				}
 			});
 		} catch (err) {
-			console.log(err);
 			setHasError(true);
 		} finally {
 			setIsLoading(false);
@@ -59,26 +59,28 @@ const NEOs = () => {
 	}
 
 	return (
-		<main className="feature">
+		<main className="Feature">
 			<DataSelector
-				instruction="Pick a date to see Near Earth Objects in the following 7-day period"
+				instruction={instruction}
 				date={date}
 				handleDateChange={handleDateChange}
-				handleSubmit={getNEOs}
+				handleSubmit={getData}
 				dateFormatter={formatToday}
 			/>
 
-			<div className="result-container">
+			<div className="Feature-result-container">
 				{isLoading && <Loading />}
 
-				{hasResult && !isLoading && (
+				{hasResult && !isLoading && featureName === 'APoD' && <APoDResult {...data} />}
+
+				{hasResult && !isLoading && featureName === 'NEOs' && (
 					<>
 						<h2>
-							{NEOs.element_count} Object{NEOs.element_count !== 1 && 's'} Found
+							{data.element_count} Object{data.element_count !== 1 && 's'} Found
 						</h2>
 
 						<div className="NEO-container">
-							{Object.values(NEOs.near_earth_objects).map((objectsOnDate) =>
+							{Object.values(data.near_earth_objects).map((objectsOnDate) =>
 								objectsOnDate.map((object) => {
 									return (
 										<NEO
@@ -96,9 +98,28 @@ const NEOs = () => {
 						</div>
 					</>
 				)}
+
+				{hasResult && !isLoading && featureName === 'RoverPhotos' && (
+					<>
+						<h2>
+							{data.photos.length} Photo{data.photos.length !== 1 && 's'} Found
+						</h2>
+
+						<div className="RoverPhotos-container">
+							{data.photos.map((photo) => (
+								<RoverPhoto
+									rover_name={photo.rover.name}
+									camera={photo.camera.full_name}
+									photo_url={photo.img_src}
+									key={photo.id}
+								/>
+							))}
+						</div>
+					</>
+				)}
 			</div>
 		</main>
 	);
 };
 
-export default NEOs;
+export default Feature;
