@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import DataSelector from './DataSelector';
 import Loading from './Loading';
@@ -8,16 +9,53 @@ import APoDResult from './APoDResult';
 import NEO from './NEO';
 import RoverPhoto from './RoverPhoto';
 
-const Feature = ({ featureName, instruction, endpoint }) => {
+const Feature = () => {
 	const [date, setDate] = useState('');
+	const [featureConfig, setFeatureConfig] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [hasResult, setHasResult] = useState(false);
 	const [data, setData] = useState({});
 
+	const { feature } = useParams();
+
 	useEffect(() => {
 		setDate(formatToday());
 	}, []);
+
+	useEffect(() => {
+		setIsLoading(true);
+
+		if (feature === 'apod') {
+			setFeatureConfig({
+				name: 'APoD',
+				instruction: 'Pick a date to see a picture',
+				endpoint: 'https://api.nasa.gov/planetary/apod?date',
+			});
+		}
+
+		if (feature === 'neos') {
+			setFeatureConfig({
+				name: 'NEOs',
+				instruction: 'Pick a date to see Near Earth Objects in the following 7-day period',
+				endpoint: 'https://api.nasa.gov/neo/rest/v1/feed?start_date',
+			});
+		}
+
+		if (feature === 'roverphotos') {
+			setFeatureConfig({
+				name: 'RoverPhotos',
+				instruction: 'Pick a date to see Rover photos taken on that day',
+				endpoint: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date',
+			});
+		}
+
+		setData({});
+		setHasError(false);
+		setHasResult(false);
+
+		setIsLoading(false);
+	}, [feature]);
 
 	const formatToday = () => {
 		const today = new Date();
@@ -37,7 +75,9 @@ const Feature = ({ featureName, instruction, endpoint }) => {
 		setIsLoading(true);
 
 		try {
-			await fetch(`${endpoint}=${date}&api_key=${process.env.REACT_APP_API_KEY}`).then(async function (response) {
+			await fetch(`${featureConfig.endpoint}=${date}&api_key=${process.env.REACT_APP_API_KEY}`).then(async function (
+				response
+			) {
 				if (response.ok) {
 					const data = await response.json();
 					setData({ ...data });
@@ -61,7 +101,7 @@ const Feature = ({ featureName, instruction, endpoint }) => {
 	return (
 		<main className="Feature">
 			<DataSelector
-				instruction={instruction}
+				instruction={featureConfig.instruction}
 				date={date}
 				handleDateChange={handleDateChange}
 				handleSubmit={getData}
@@ -71,9 +111,9 @@ const Feature = ({ featureName, instruction, endpoint }) => {
 			<div className="Feature-result-container">
 				{isLoading && <Loading />}
 
-				{hasResult && !isLoading && featureName === 'APoD' && <APoDResult {...data} />}
+				{hasResult && !isLoading && featureConfig.name === 'APoD' && <APoDResult {...data} />}
 
-				{hasResult && !isLoading && featureName === 'NEOs' && (
+				{hasResult && !isLoading && featureConfig.name === 'NEOs' && (
 					<>
 						<h2>
 							{data.element_count} Object{data.element_count !== 1 && 's'} Found
@@ -99,7 +139,7 @@ const Feature = ({ featureName, instruction, endpoint }) => {
 					</>
 				)}
 
-				{hasResult && !isLoading && featureName === 'RoverPhotos' && (
+				{hasResult && !isLoading && featureConfig.name === 'RoverPhotos' && (
 					<>
 						<h2>
 							{data.photos.length} Photo{data.photos.length !== 1 && 's'} Found
